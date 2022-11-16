@@ -1,0 +1,82 @@
+
+
+
+<div class="overflow-x-auto relative shadow-md sm:rounded-lg" *ngIf="currentPeople.id">
+  <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <tr>
+              <th scope="col" class="py-3 px-6">
+                  Pessoa
+              </th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+              <th class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                Nome: {{ currentPeople.name }}
+              </th>
+          </tr>
+          <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+              <th class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                Sobrenome: {{ currentPeople.lastName }}
+              </th>
+          </tr>
+          <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+              <th class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                Nacionalidade: {{ currentPeople.nacionality }}
+              </th>
+          </tr>
+          <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+              <th class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                CPF: {{ currentPeople.cpf }}
+              </th>
+          </tr>
+          <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+              <th class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                CEP: {{ currentPeople.cep }}
+              </th>
+          </tr>
+          <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+              <th class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                Estado: {{ currentPeople.state }}
+              </th>
+          </tr>
+          <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+              <th class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                Cidade: {{ currentPeople.city }}
+              </th>
+          </tr>
+          <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+              <th class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                Endereço: {{ currentPeople.public_place }}
+              </th>
+          </tr>
+          <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+              <th class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                E-mail: {{ currentPeople.email }}
+              </th>
+          </tr>
+          <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+              <th class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                Telefone: {{ currentPeople.telephone }}
+              </th>
+          </tr>
+          <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+            <td class="py-4 px-6">
+              <div class="flex space-x-4">
+                <a routerLink="/people/update/{{ currentPeople.id }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                  <svg class="w-6 h-6" data-darkreader-inline-stroke="" fill="none" stroke="currentColor" style="--darkreader-inline-stroke:currentColor;" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                </a>
+                <a routerLink="/people/delete/{{ currentPeople.id }}" class="font-medium text-red-600 dark:text-red-500 hover:underline">
+                  <svg class="w-6 h-6" data-darkreader-inline-stroke="" fill="none" stroke="currentColor" style="--darkreader-inline-stroke:currentColor;" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                </a>
+              </div>
+            </td>
+        </tr>
+      </tbody>
+  </table>
+</div>
+
+<div *ngIf="!currentPeople.id">
+  <p>Essa pessoa não existe!</p>
+</div>
