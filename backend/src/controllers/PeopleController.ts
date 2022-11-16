@@ -63,12 +63,12 @@ export const getPeopleController = async (
 
 export const getAllPeopleController = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const peoples = await getAllPeopleService();
+    const people = await getAllPeopleService();
 
     res.status(200).json({
       status: 'success',
       data: {
-        peoples,
+        people,
       },
     });
   } catch (err: any) {
