@@ -1,55 +1,83 @@
 
-  <form>
-    <div *ngIf="!submitted">
-
+  <form [formGroup]="form" (ngSubmit)="createPeople()" >
     <div class="relative z-0 mb-6 w-full group">
-        <input [(ngModel)]="people.name" type="text" name="name" id="name" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+        <input  formControlName="name" [ngClass]="{ '': submitted && f['name'].errors }"  type="text" name="name" id="name" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" "/>
         <label for="name" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Nome: </label>
+        <div *ngIf="submitted && f['name'].errors" class="mt-2 text-sm text-red-600 dark:text-red-500">
+          <div *ngIf="f['name'].errors['required']">O nome não pode estar vazio!</div>
+        </div>
     </div>
-    <div class="relative z-0 mb-6 w-full group">
-        <input [(ngModel)]="people.lastName" type="text" name="lastName" id="lastName" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
-        <label for="name" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Sobrenome: </label>
+       <div class="relative z-0 mb-6 w-full group">
+        <input formControlName="lastName" [ngClass]="{ '': submitted && f['lastName'].errors }"   type="text" name="lastName" id="lastName" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" "/>
+        <label for="lastName" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Sobrenome: </label>
+        <div *ngIf="submitted && f['lastName'].errors" class="mt-2 text-sm text-red-600 dark:text-red-500">
+          <div *ngIf="f['lastName'].errors['required']">O sobrenome não pode estar vazio!</div>
+        </div>
     </div>
-    <div class="relative z-0 mb-6 w-full group">
-        <input [(ngModel)]="people.nacionality" type="text" name="nacionality" id="nacionality" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+     <div class="relative z-0 mb-6 w-full group">
+        <input formControlName="nacionality" [ngClass]="{ '': submitted && f['nacionality'].errors }"  type="text" name="nacionality" id="nacionality" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" "/>
         <label for="nacionality" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Nacionalidade: </label>
-    </div>
+        <div *ngIf="submitted && f['nacionality'].errors" class="mt-2 text-sm text-red-600 dark:text-red-500">
+          <div *ngIf="f['nacionality'].errors['required']">A nacionalidade não pode estar vazio!</div>
+        </div>
+      </div>
     <div class="relative z-0 mb-6 w-full group">
-        <input [(ngModel)]="people.cpf" type="text" name="cpf" id="cpf" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+        <input formControlName="cpf" [ngClass]="{ '': submitted && f['cpf'].errors }"   type="text" name="cpf" id="cpf" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" "/>
         <label for="cpf" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">CPF: </label>
-    </div>
+        <div *ngIf="submitted && f['cpf'].errors" class="mt-2 text-sm text-red-600 dark:text-red-500">
+          <div *ngIf="f['cpf'].errors['required']">O CPF não pode estar vazio!</div>
+          <div *ngIf="f['cpf'].invalid">O CPF está inválido!</div>
+        </div>
+      </div>
     <div class="relative z-0 mb-6 w-full group">
-        <input [(ngModel)]="people.cep" type="text" name="cep" id="cep" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+        <input formControlName="cep" [ngClass]="{ '': submitted && f['cep'].errors }"   type="text" name="cep" id="cep" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" "/>
         <label for="cep" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">CEP: </label>
-    </div>
+        <div *ngIf="submitted && f['cep'].errors" class="mt-2 text-sm text-red-600 dark:text-red-500">
+          <div *ngIf="f['cep'].errors['required']">O CEP não pode estar vazio!</div>
+          <div *ngIf="f['cep'].invalid">O CEP está inválido!</div>
+
+        </div>
+      </div>
     <div class="relative z-0 mb-6 w-full group">
-        <input [(ngModel)]="people.state" type="text" name="state" id="state" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+        <input formControlName="state" [ngClass]="{ '': submitted && f['state'].errors }"   type="text" name="state" id="state" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" "/>
         <label for="state" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Estado: </label>
-    </div>
+        <div *ngIf="submitted && f['state'].errors" class="mt-2 text-sm text-red-600 dark:text-red-500">
+          <div *ngIf="f['state'].errors['required']">O estado não pode estar vazio!</div>
+        </div>
+      </div>
     <div class="relative z-0 mb-6 w-full group">
-        <input [(ngModel)]="people.city" type="text" name="city" id="city" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+        <input formControlName="city" [ngClass]="{ '': submitted && f['city'].errors }"  type="text" name="city" id="city" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" "/>
         <label for="city" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Cidade: </label>
-    </div>
+        <div *ngIf="submitted && f['city'].errors" class="mt-2 text-sm text-red-600 dark:text-red-500">
+          <div *ngIf="f['city'].errors['required']">A cidade não pode estar vazio!</div>
+        </div>
+      </div>
     <div class="relative z-0 mb-6 w-full group">
-        <input [(ngModel)]="people.public_place" type="text" name="public_place" id="public_place" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+        <input formControlName="public_place" [ngClass]="{ '': submitted && f['public_place'].errors }"   type="text" name="public_place" id="public_place" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" "/>
         <label for="public_place" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Endereço: </label>
-    </div>
+        <div *ngIf="submitted && f['public_place'].errors" class="mt-2 text-sm text-red-600 dark:text-red-500">
+          <div *ngIf="f['public_place'].errors['required']">O endereço não pode estar vazio!</div>
+        </div>
+      </div>
     <div class="relative z-0 mb-6 w-full group">
-        <input [(ngModel)]="people.email" type="text" name="email" id="email" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+        <input formControlName="email" [ngClass]="{ '': submitted && f['email'].errors }"   type="email" name="email" id="email" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" "/>
         <label for="email" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">E-mail: </label>
-    </div>
+        <div *ngIf="submitted && f['email'].errors" class="mt-2 text-sm text-red-600 dark:text-red-500">
+          <div *ngIf="f['email'].errors['required']">O e-mail não pode estar vazio!</div>
+          <div *ngIf="f['email'].invalid">O e-mail está inválido!</div>
+        </div>
+      </div>
     <div class="relative z-0 mb-6 w-full group">
-        <input [(ngModel)]="people.telephone" type="text" name="telephone" id="telephone" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+        <input formControlName="telephone" [ngClass]="{ '': submitted && f['telephone'].errors }"   type="text" name="telephone" id="telephone" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" "/>
         <label for="telephone" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Telefone: </label>
+        <div *ngIf="submitted && f['telephone'].errors" class="mt-2 text-sm text-red-600 dark:text-red-500">
+          <div *ngIf="f['telephone'].errors['required']">O telefone não pode estar vazio!</div>
+        </div>
+      </div>
+
+      <button type="submit"  class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+
+
+    <div *ngIf="status" [ngClass]="status==='fail' ? 'p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800': 'p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800' " role="alert">
+      <h4>{{ message }}</h4>
     </div>
-
-      <button (click)="createPeople()" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
-
-    </div>
-
-    <div *ngIf="submitted">
-      <h4>Pessoa cadastrada com sucesso!</h4>
-    </div>
-  </form>
-
-

@@ -10,6 +10,7 @@ import { UpdatePeopleComponent } from './components/update-people/update-people.
 import { DeletePeopleComponent } from './components/delete-people/delete-people.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,7 +20,13 @@ import { HttpClientModule } from '@angular/common/http';
     UpdatePeopleComponent,
     DeletePeopleComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
