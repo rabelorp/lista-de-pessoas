@@ -30,6 +30,7 @@ export class CreatePeopleComponent implements OnInit {
   submitted = false;
   status = '';
   message = '';
+  show = false;
 
   constructor(
     private peopleService: PeopleService,
@@ -96,13 +97,14 @@ export class CreatePeopleComponent implements OnInit {
     }
     this.peopleService.create(this.form.value).subscribe({
       next: (res) => {
-        this.submitted = true;
         if (res.status === 'success') {
+          this.show = true;
           this.status = res.status;
           this.message = 'Pessoa salva com sucesso!';
         }
       },
       error: (e) => {
+        this.show = true;
         this.status = e.error.status;
         this.message = 'Ocorreu algum erro ao salvar os dados!';
         console.error(e);
