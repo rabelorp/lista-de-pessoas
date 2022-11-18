@@ -26,12 +26,12 @@ export class UpdatePeopleComponent implements OnInit {
     city: new FormControl(''),
     public_place: new FormControl(''),
     email: new FormControl(''),
-    telephone: new FormControl(''),
   });
   submitted = false;
   status = '';
   message = '';
   currentPeople: any;
+  show = false;
 
   constructor(
     private peopleService: PeopleService,
@@ -110,13 +110,14 @@ export class UpdatePeopleComponent implements OnInit {
     }
     this.peopleService.update(id, this.form.value).subscribe({
       next: (res) => {
-        this.submitted = true;
         if (res.status === 'success') {
+          this.show = true;
           this.status = res.status;
           this.message = 'Pessoa salva com sucesso!';
         }
       },
       error: (e) => {
+        this.show = true;
         this.status = e.error.status;
         this.message = 'Ocorreu algum erro ao salvar os dados!';
         console.error(e);
