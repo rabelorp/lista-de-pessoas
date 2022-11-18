@@ -11,6 +11,8 @@ import { DeletePeopleComponent } from './components/delete-people/delete-people.
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NgxMaskModule } from 'ngx-mask';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,6 +28,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    NgxMaskModule.forRoot({
+      dropSpecialCharacters: false, // ao salvar, vai manter a mascara
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent],
