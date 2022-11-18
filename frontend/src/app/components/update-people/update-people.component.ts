@@ -84,7 +84,6 @@ export class UpdatePeopleComponent implements OnInit {
     this.peopleService.get(id).subscribe({
       next: (data) => {
         this.currentPeople = data.data.people;
-        console.log(data.data.people);
       },
       error: (e) => console.error(e),
     });
