@@ -2,38 +2,82 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { People } from 'src/app/models/people.model';
 import { PeopleService } from 'src/app/services/people.service';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+
 @Component({
   selector: 'app-update-people',
   templateUrl: './update-people.component.html',
   styleUrls: ['./update-people.component.scss'],
 })
 export class UpdatePeopleComponent implements OnInit {
-  people: People = {
-    id: '',
-    name: '',
-    lastName: '',
-    nacionality: '',
-    cpf: '',
-    cep: '',
-    state: '',
-    city: '',
-    public_place: '',
-    email: '',
-    telephone: '',
-    currentPeople: {},
-    people: {},
-    data: {},
-  };
+  form: FormGroup = new FormGroup({
+    name: new FormControl(''),
+    lastName: new FormControl(''),
+    nacionality: new FormControl(''),
+    cpf: new FormControl(''),
+    cep: new FormControl(''),
+    state: new FormControl(''),
+    city: new FormControl(''),
+    public_place: new FormControl(''),
+    email: new FormControl(''),
+    telephone: new FormControl(''),
+  });
   submitted = false;
+  status = '';
+  message = '';
   currentPeople: any;
 
   constructor(
     private peopleService: PeopleService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private formBuilder: FormBuilder
   ) {}
 
   ngOnInit(): void {
     this.getPeople(this.route.snapshot.params['id']);
+    this.form = this.formBuilder.group({
+      name: ['', [Validators.required, Validators.minLength(5)]],
+      lastName: ['', [Validators.required, Validators.minLength(5)]],
+      nacionality: ['', [Validators.required, Validators.minLength(5)]],
+      cpf: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(5),
+          Validators.pattern(/^\d{3}\.\d{3}\.\d{3}\-\d{2}$/),
+        ],
+      ],
+      cep: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(5),
+          Validators.pattern(/^[0-9]{5}-[0-9]{3}$/),
+        ],
+      ],
+      state: ['', [Validators.required, Validators.minLength(5)]],
+      city: ['', [Validators.required, Validators.minLength(5)]],
+      public_place: ['', [Validators.required, Validators.minLength(5)]],
+      email: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(5),
+          Validators.pattern(/[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/),
+        ],
+      ],
+      telephone: ['', [Validators.required, Validators.minLength(5)]],
+    });
+  }
+
+  get f(): { [key: string]: AbstractControl } {
+    return this.form.controls;
   }
 
   getPeople(id: string): void {
@@ -48,24 +92,35 @@ export class UpdatePeopleComponent implements OnInit {
 
   updatePeople(id: string): void {
     const data = {
-      name: this.currentPeople.name,
-      lastName: this.currentPeople.lastName,
-      nacionality: this.currentPeople.nacionality,
-      cpf: this.currentPeople.cpf,
-      cep: this.currentPeople.cep,
-      state: this.currentPeople.state,
-      city: this.currentPeople.city,
-      public_place: this.currentPeople.public_place,
-      email: this.currentPeople.email,
-      telephone: this.currentPeople.telephone,
+      name: this.form.get('name'),
+      lastName: this.form.get('lastName'),
+      nacionality: this.form.get('nacionality'),
+      cpf: this.form.get('cpf'),
+      cep: this.form.get('cep'),
+      state: this.form.get('state'),
+      city: this.form.get('city'),
+      public_place: this.form.get('public_place'),
+      email: this.form.get('email'),
+      telephone: this.form.get('telephone'),
     };
+    this.submitted = true;
 
-    this.peopleService.update(id, data).subscribe({
+    if (this.form.invalid) {
+      return;
+    }
+    this.peopleService.update(id, this.form.value).subscribe({
       next: (res) => {
-        console.log('data', data);
         this.submitted = true;
+        if (res.status === 'success') {
+          this.status = res.status;
+          this.message = 'Pessoa salva com sucesso!';
+        }
       },
-      error: (e) => console.error(e),
+      error: (e) => {
+        this.status = e.error.status;
+        this.message = 'Ocorreu algum erro ao salvar os dados!';
+        console.error(e);
+      },
     });
   }
 }
